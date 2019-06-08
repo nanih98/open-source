@@ -1,0 +1,9 @@
+---
+- hosts: all
+  tasks:
+    - name: Remove and stop nginx, M06
+      service:
+          name: nginx
+          state: stopped
+    - name: ensure nginx is not installed
+      apt: name=nginx state=absent

@@ -1,0 +1,14 @@
+- hosts: all
+  tasks:
+    - name: Ansible lineinfile regexp replace example
+      lineinfile:
+        dest: /tmp/sample.txt
+        regexp: '^(.*)maria(.*)$'
+        line: 'pepe'
+        backrefs: yes
+    - name: Ansible add line dani
+      lineinfile:
+        dest: /tmp/sample.txt
+        line: dani
+        state: present
+        create: yes
