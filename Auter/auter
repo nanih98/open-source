@@ -60,4 +60,4 @@
 
 # Notes on scheduling:
 # - If no cron schedule matches what you need, comment out all cron jobs and create 'at' jobs instead
-# - Be aware that for example the third Friday may come before the third Wednesday
+# - Be aware that for example the third Friday may come before the third Wednesday 
