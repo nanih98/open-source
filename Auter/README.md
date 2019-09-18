@@ -14,3 +14,5 @@ Copy or download install.sh script. The script installation will use the configu
 ```diff
 $ cd /tmp && bash install.sh 
 ```
+# IMPORTANT
+This cron and auter.conf will reboot the system and apply the changes. To change autoreboot change AUTOREBOOT="yes" by AUTOREBOOT="no" in auter.conf and also change your cron if it's necessary.
