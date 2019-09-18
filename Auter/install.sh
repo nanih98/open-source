@@ -25,7 +25,7 @@ sudo cd /tmp && wget https://raw.githubusercontent.com/nanih98/open-source/maste
 sudo cd /tmp && wget https://raw.githubusercontent.com/nanih98/open-source/master/Auter/auter && cp -ar auter /etc/cron.d
 
 #Remove the files from /tmp , there are not necessary.
-sudo cd /tmp && rm -rvf auter auter.conf 
+sudo cd /tmp && rm -rvf auter auter.conf  
 
 
 
