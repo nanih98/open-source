@@ -1,5 +1,5 @@
 #!/bin/bash
-# Important, quit sudo command when you are executing instructions if YOU ARE USING DOCKER. "sudo: command not found"
+# Important, quit sudo command when you are executing instructions if YOU ARE USING DOCKER WITH ROOT USER. "sudo: command not found"
 if [[ -r /etc/os-release ]]; then
     . /etc/os-release
     echo "Running $NAME $VERSION" 
