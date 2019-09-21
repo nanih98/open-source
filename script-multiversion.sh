@@ -1,7 +1,6 @@
 #!/bin/bash
-# Autor: dcr@iam-syscloud.com
-# Post: https://www.iam-syscloud.com
-# Important, quit sudo command when you are executing instructions if YOU ARE USING DOCKER WITH ROOT USER. "sudo: command not found"
+# Autor NANI: dcr@iam-syscloud.com
+# Important, quit sudo command when you are executing this script if YOU ARE USING DOCKER (as root inside the container). Error -->  "sudo: command not found"
 if [[ -r /etc/os-release ]]; then
     . /etc/os-release
     echo "Running $NAME $VERSION" 
