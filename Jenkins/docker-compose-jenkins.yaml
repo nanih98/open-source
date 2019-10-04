@@ -1,17 +1,43 @@
 version: '3.5'
 services:
+  traefik:
+    container_name: traefik
+    image: traefik:alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /srv/traefik:/etc/traefik # This is where we must create the .pem and .key certificates. They must be called with the same name that we will later put in the command: TLS: / etc / ...
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: 
+      - --api
+      - --docker=true
+      - --docker.watch=true
+      - --docker.domain=docker.localhost
+      - --docker.exposedbydefault=false
+      - --logLevel=INFO
+      - --entryPoints=Name:http Address::80 Redirect.EntryPoint:https
+      - --defaultentrypoints=http,https
+      - --entryPoints=Name:https Address::443 TLS:/etc/traefik/devopstech.crt,/etc/traefik/devopstech.key # comment this if we decide to use let's encrypt (acme)
+      - --accesslog.filepath=/etc/traefik/traefik_access.log # This is useful to have an access control to the application (headers with the IP etc ..)
+      #- --accesslog.format=json
+      - --traefiklog=true
+      - --traefiklog.filepath=/etc/traefik/traefik_log.log # use this command if we want to centralize in a file the logs of traefik.
+      #- --acme=true           
+      #- --acme.entrypoint=https
+      #- --acme.tlsChallenge=true    # uncomment everything if we want to use acme (let's encrypt instead of our own certificate).
+      #- --acme.onhostrule=true
+      #- --acme.storage=/etc/traefik/acme.json
+
   jenkins:
     container_name: jenkins
     hostname: jenkins
-    image: 'jenkins/jenkins:lts'
-    labels:
-      kompose.service.type: nodeport
-    ports:
-      - '80:8080'
-      - '443:8443'
-      - '50000:50000'
+    image: jenkins/jenkins:lts
     volumes:
-      - 'jenkins_data:/jenkins_config'
-volumes:
-  jenkins_data:
-    driver: local
+      - /srv/jenkins_home:/var/jenkins_home
+    labels:
+      - traefik.enable=true
+      - traefik.port=8080
+      - traefik.frontend.rule=Host:jenkins.devopstech.org
+      - traefik.backend=jenkins
