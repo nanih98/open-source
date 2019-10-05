@@ -5,7 +5,7 @@ services:
     image: traefik:alpine
     restart: always
     ports:
-      - "80:80"
+      - "80:80" 
       - "443:443"
     volumes:
       - /srv/traefik:/etc/traefik # This is where we must create the .pem and .key certificates. They must be called with the same name that we will later put in the command: TLS: / etc / ...
@@ -17,7 +17,7 @@ services:
       - --docker.domain=docker.localhost
       - --docker.exposedbydefault=false
       - --logLevel=INFO
-      - --entryPoints=Name:http Address::80 Redirect.EntryPoint:https
+      - --entryPoints=Name:http Address::80 Redirect.EntryPoint:https # redirect 80 to 443 to force use ssl certificate 
       - --defaultentrypoints=http,https
       - --entryPoints=Name:https Address::443 TLS:/etc/traefik/devopstech.crt,/etc/traefik/devopstech.key # comment this if we decide to use let's encrypt (acme)
       - --accesslog.filepath=/etc/traefik/traefik_access.log # This is useful to have an access control to the application (headers with the IP etc ..)
@@ -26,18 +26,17 @@ services:
       - --traefiklog.filepath=/etc/traefik/traefik_log.log # use this command if we want to centralize in a file the logs of traefik.
       #- --acme=true           
       #- --acme.entrypoint=https
-      #- --acme.tlsChallenge=true    # uncomment everything if we want to use acme (let's encrypt instead of our own certificate).
+      #- --acme.tlsChallenge=true    # uncomment everything of these lines if we want to use acme (let's encrypt instead of our own certificate).
       #- --acme.onhostrule=true
       #- --acme.storage=/etc/traefik/acme.json
-
   jenkins:
     container_name: jenkins
     hostname: jenkins
     image: jenkins/jenkins:lts
     volumes:
-      - /srv/jenkins_home:/var/jenkins_home
+      - /srv/jenkins_home:/var/jenkins_home # watch out! Possibly there will be problems with the jenkins mapped volumes, execute the commands that I specify in the post.
     labels:
       - traefik.enable=true
-      - traefik.port=8080
-      - traefik.frontend.rule=Host:jenkins.devopstech.org
+      - traefik.port=8080 # jenkins default image expose by default this port, don't change this parameter :)
+      - traefik.frontend.rule=Host:jenkins.yoursite.example
       - traefik.backend=jenkins
