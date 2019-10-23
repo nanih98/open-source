@@ -13,4 +13,4 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose -y
 sudo systemctl start docker
 sudo systemctl enable docker
 sudo systemctl status docker
-sudo usermod -aG root docker
+sudo usermod -aG docker root
