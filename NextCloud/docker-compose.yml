@@ -6,13 +6,13 @@ services:
     restart: always
     container_name: mariadb
     volumes:
-      - /srv/mariadb/data:/var/lib/mysql
+      - /srv/mariadb/data:/var/lib/mysql #important persistent data mapped on host
     environment:
       - MYSQL_ROOT_PASSWORD= mypassword # for root 
       #- MYSQL_PASSWORD= mypassword2 # for nextcloud user
       - MYSQL_DATABASE=nextcloud # name of the database, dont change it just in case
       #- MYSQL_USER=nextcloud # user created in mysql to interact with the application
-      # At the moment these parameters are already necessary for the application to work, everything and that one could investigate.   
+      # At the moment these environments variables are already necessary for the application to work, everything and that one could investigate.   
   frontend:
     image: nextcloud
     container_name: nextcloud
@@ -24,9 +24,9 @@ services:
     depends_on:
       - db
     volumes:
-      - /srv/nextcloud/www:/var/www/html
+      - /srv/nextcloud/www:/var/www/html # main code mapped on host to be persistent
     restart: always
-    environment:
-      - NEXTCLOUD_ADMIN_USER= admin
-      - NEXTCLOUD_ADMIN_PASSWORD= }v/Xe\ruCXbw7a(G?2_  # to create the admin user with his password, however in the installation will be requested again, so you can ignore these variables.
+    #environment:
+      #- NEXTCLOUD_ADMIN_USER= admin
+      #- NEXTCLOUD_ADMIN_PASSWORD= }v/Xe\ruCXbw7a(G?2_  # to create the admin user with his password, however in the installation will be requested again, so you can ignore these variables.
 #
