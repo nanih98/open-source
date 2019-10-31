@@ -1,0 +1,63 @@
+version: '3.5'
+services:
+  traefik:
+    container_name: traefik
+    image: traefik:alpine
+    restart: always
+    ports:
+      - "80:80" 
+      - "443:443"
+    volumes:
+      - /srv/traefik:/etc/traefik # This is where we must create the .pem and .key certificates. They must be called with the same name that we will later put in the command: TLS: / etc / ...
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: 
+      - --api
+      - --docker=true
+      - --docker.watch=true
+      - --docker.domain=docker.localhost
+      - --docker.exposedbydefault=false
+      - --logLevel=INFO
+      - --entryPoints=Name:http Address::80 Redirect.EntryPoint:https # redirect 80 to 443 to force use ssl certificate 
+      - --defaultentrypoints=http,https
+      - --entryPoints=Name:https Address::443 TLS:/etc/traefik/devopstech.crt,/etc/traefik/devopstech.key # comment this if we decide to use let's encrypt (acme)
+      - --accesslog.filepath=/etc/traefik/traefik_access.log # This is useful to have an access control to the application (headers with the IP etc ..)
+      #- --accesslog.format=json # if you want the logs in json format
+      - --traefiklog=true
+      - --traefiklog.filepath=/etc/traefik/traefik_log.log # use this command if we want to centralize in a file the logs of traefik.
+      #- --acme=true           
+      #- --acme.entrypoint=https
+      #- --acme.tlsChallenge=true    # uncomment everything of these lines if we want to use acme (let's encrypt instead of our own certificate).
+      #- --acme.onhostrule=true
+      #- --acme.storage=/etc/traefik/acme.json  
+  db:
+    image: mariadb
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    restart: always
+    container_name: mariadb
+    volumes:
+      - /srv/mariadb/data:/var/lib/mysql #important persistent data mapped on host
+    environment:
+      - MYSQL_ROOT_PASSWORD= mypassword # for root 
+      - MYSQL_DATABASE=nextcloud # name of the database, dont change it just in case
+      #- MYSQL_PASSWORD= mypassword2 # for nextcloud user
+      #- MYSQL_USER=nextcloud # user created in mysql to interact with the application
+      # At the moment these environments variables are already necessary for the application to work, everything and that one could investigate.   
+  frontend:
+    image: nextcloud
+    container_name: nextcloud
+    links:
+      - db
+    depends_on:
+      - db
+    volumes:
+      - /srv/nextcloud/www:/var/www/html # main code mapped on host to be persistent
+    restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.port=80 # default port of the container frontend (nextcloud web)
+      - traefik.frontend.rule=Host:nextcloud.yoursite.example #or the domain that you want to use
+      - traefik.backend=jenkins
+    #environment:
+      #- NEXTCLOUD_ADMIN_USER= admin
+      #- NEXTCLOUD_ADMIN_PASSWORD= }v/Xe\ruCXbw7a(G?2_  # to create the admin user with his password, however in the installation will be requested again, so you can ignore these variables.
+#
