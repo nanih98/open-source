@@ -13,8 +13,7 @@ RUN cd /tmp && wget https://raw.githubusercontent.com/nanih98/open-source/master
 
 RUN cd /tmp && bundle install
 
-#Create the healthcheck.
-RUN echo "OK" >> /srv/jekyll/healthcheck 
+#Once the container is created, create the healthcheck file within the mapped directory of /srv/jekyll. Example: echo "OK" >> /srv/jekyll/healthcheck
 HEALTHCHECK --interval=5s --timeout=3s CMD curl --fail localhost:4000/healthcheck || exit 1
 
 EXPOSE 4000
