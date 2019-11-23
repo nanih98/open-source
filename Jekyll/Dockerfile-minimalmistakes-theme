@@ -1,0 +1,23 @@
+FROM jekyll/builder
+
+MAINTAINER "Daniel Cascales Romero <devopstech253@gmail.com>"
+
+#Install pre-gem requisites. 
+
+RUN echo "source 'https://rubygems.org'" >> /tmp/Gemfile && \
+    echo "gemspec" >> /tmp/Gemfile
+
+RUN apk add wget && apk add curl  
+
+RUN cd /tmp && wget https://raw.githubusercontent.com/nanih98/open-source/master/jekyll-theme-minimal.gemspec
+
+RUN cd /tmp && bundle install
+
+#Once the container is created, create the healthcheck file within the mapped directory of /srv/jekyll. Example: echo "OK" >> /srv/jekyll/healthcheck
+HEALTHCHECK --interval=5s --timeout=3s CMD curl --fail localhost:4000/healthcheck || exit 1
+
+EXPOSE 4000
+
+WORKDIR /srv/jekyll
+
+CMD ["jekyll","serve","--watch","--drafts"]
