@@ -14,4 +14,4 @@ Add this lines:
 **define('WP_CACHE', true);**  
 **define( 'WP_CACHE_KEY_SALT', 'example.com' );**  
 **define('WP_REDIS_HOST', 'redis');** // redis because is the name of the container. Maybe can be 'localhost' if redis is installed on localhost.  
-**/*define('WP_REDIS_PASSWORD', 'pruebas1234'); */**  // password if you hae configured redis with password
+**define('WP_REDIS_PASSWORD', 'pruebas1234');**  // password if you hae configured redis with password
