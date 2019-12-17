@@ -111,7 +111,7 @@ RUN pecl install redis
 
 RUN cd /usr/local/etc/php/conf.d && \
     touch redis.ini && \
-    echo "extension=redis.so" redis.ini 
+    echo "extension=redis.so" >> redis.ini 
 
 # Install some utilities
 
