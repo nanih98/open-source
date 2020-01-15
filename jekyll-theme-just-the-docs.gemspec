@@ -3,8 +3,8 @@
 Gem::Specification.new do |spec|
   spec.name          = "just-the-docs"
   spec.version       = "0.2.7"
-  spec.authors       = ["Patrick Marsceill"]
-  spec.email         = ["patrick.marsceill@gmail.com"]
+  spec.authors       = ["Patrick Marsceill,Daniel Cascales"]
+  spec.email         = ["devopstech253@gmail.com"]
 
   spec.summary       = %q{A modern, highly customizable, and responsive Jekyll theme for documention with built-in search.}
   spec.homepage      = "https://github.com/pmarsceill/just-the-docs"
@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "jekyll", "~> 3.8.5"
   spec.add_runtime_dependency "jekyll-seo-tag", "~> 2.0"
-  spec.add_runtime_dependency "rake", "~> 12.3.1"
+  spec.add_runtime_dependency "rake", "~> 13.0.1"
 
   spec.add_development_dependency "bundler", "~> 2.0.1"
 end
