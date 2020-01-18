@@ -1,4 +1,3 @@
-Learn more or give us feedback
 # coding: utf-8
 
 Gem::Specification.new do |spec|
@@ -20,4 +19,3 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 2.0.1"
 end
-
