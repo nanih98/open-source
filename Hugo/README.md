@@ -14,8 +14,10 @@ $ cd docs/exampleSite && cp -ar * ../
 ![Github Hugo](https://storage.googleapis.com/devopstech/Github-photos/hugo-github.png)
 
 
-**Now, run the docker-compose.yml file and check the logs of the container
+**Now, run the docker-compose.yml file and check the logs of the container.**
 
 
 ![Github Hugo](https://storage.googleapis.com/devopstech/Github-photos/hugo-github-2.png)
+
+> **Note:** as you can see, the CMD passed it to the docker-compose instead of the dockerfile, so every time I change a parameter in the hugo server I don't have to reconstruct the image.
 
