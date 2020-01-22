@@ -26,4 +26,4 @@ $ cd docs/exampleSite && cp -ar * ../
 
 # Contact
 
-Any problem? Contact me **devopstech253@gmail.com**. 
+Any problem? Contact me **info@devopstech.org**. 
