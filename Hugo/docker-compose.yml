@@ -1,0 +1,11 @@
+version: '3.5'
+services:
+  website:
+    image: nanih98/hugo-builder:extras
+    container_name: hugo
+    #working_dir: /src/
+    command: hugo server --themesDir="../.." --bind 0.0.0.0 --buildDrafts --baseURL="http://127.0.0.1" --port=80
+    volumes:
+      - /srv/docs:/src
+    ports:
+      - '80:80'
