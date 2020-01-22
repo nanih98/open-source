@@ -4,8 +4,9 @@ services:
     container_name: dokuwiki
     image: nanih98/dokuwiki
     restart: always
-    expose:
-      - 4000
+    ports:
+      - 80:80
+      - 443:443
     volumes:
       - /srv/dokuwiki:/bitnami
     environment:
