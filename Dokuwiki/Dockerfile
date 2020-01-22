@@ -14,11 +14,13 @@ RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt
 ## Modify the ports used by Apache by default
 # It is also possible to change these environment variables at runtime
 
-RUN echo "OK" >> /tmp/healthcheck 
+#RUN echo "OK" >> /tmp/healthcheck 
 
-HEALTHCHECK --interval=300s --timeout=3s CMD grep OK /tmp/healthcheck || exit 1
+#HEALTHCHECK --interval=300s --timeout=3s CMD grep OK /tmp/healthcheck || exit 1
 
-#HEALTHCHECK --interval=5s --timeout=3s CMD curl --fail localhost:4000/index || exit 1
+
+# echo "OK" >> /path/jekyll/directory/healtcheck
+HEALTHCHECK --interval=5s --timeout=3s CMD curl --fail localhost:80/healthcheck || exit 1
 
 ENV APACHE_HTTP_PORT_NUMBER=80
 ENV APACHE_HTTPS_PORT_NUMBER=443
