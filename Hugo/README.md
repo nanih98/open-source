@@ -5,7 +5,7 @@ $ cd /srv
 $ git clone https://github.com/matcornic/hugo-theme-learn.git docs
 $ cd docs/exampleSite && cp -ar * ../
 ```
-> **Note**: the theme I use from Hugo is an example, you can download the one you need at [Hugo Templates](https://themes.gohugo.io/)
+> **Note**: the theme I use from Hugo is an example, you can download the one you need in the page [Hugo Templates](https://themes.gohugo.io/)
 
 
 
