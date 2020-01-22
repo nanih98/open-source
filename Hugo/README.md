@@ -21,7 +21,7 @@ $ cd docs/exampleSite && cp -ar * ../
 
 > **Note:** as you can see, the CMD passed it to the docker-compose instead of the dockerfile, so every time I change a parameter in the hugo server I don't have to reconstruct the image.
 
-## Change the line according to your needs.
+### Change the line according to your needs.
 
 
 # Contact
