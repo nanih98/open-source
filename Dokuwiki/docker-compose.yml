@@ -1,0 +1,16 @@
+version: '3.5'
+services:
+   wiki:
+    container_name: dokuwiki
+    image: nanih98/dokuwiki
+    restart: always
+    expose:
+      - 4000
+    volumes:
+      - /srv/dokuwiki:/bitnami
+    environment:
+      - DOKUWIKI_USERNAME=username
+      - DOKUWIKI_FULL_NAME=Devopstech Docs    
+      - DOKUWIKI_PASSWORD=pass
+      - DOKUWIKI_EMAIL=info@devopstech.org
+      - DOKUWIKI_WIKI_NAME=Devopstech
