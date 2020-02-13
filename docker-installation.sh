@@ -9,3 +9,4 @@ curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compo
 chmod +x /usr/bin/docker-compose
 systemctl status docker
 docker-compose --version
+exit 0
