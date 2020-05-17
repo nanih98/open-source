@@ -6,7 +6,7 @@ services:
     restart: always
     ports:
       - "80:8080"
-    image: jenkins:alpine
+    image: jenkins/jenkins:alpine
     volumes:
       - /srv/jenkins_home:/var/jenkins_home
     environment:
