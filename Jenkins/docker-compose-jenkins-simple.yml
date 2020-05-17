@@ -2,9 +2,12 @@ version: '3.5'
 services:
   jenkins:
     container_name: jenkins
-    hostname: jenkins
+    hostname: jenkins-master
+    restart: always
     ports:
       - "80:8080"
-    image: jenkins/jenkins:lts
+    image: jenkins:alpine
     volumes:
-      - /srv/jenkins_home:/var/jenkins_home # watch out! Possibly there will be problems with the jenkins mapped volumes, execute the commands that I specify in the post.
+      - /srv/jenkins_home:/var/jenkins_home
+    environment:
+      JAVA_OPTS: "-Xms512m -Xmx1024m"
