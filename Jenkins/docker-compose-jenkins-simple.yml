@@ -12,4 +12,6 @@ services:
       # chown -R 1000:1000 /srv/jenkins_home . (or your path if not is located in /srv)
       - /srv/jenkins_home:/var/jenkins_home
     environment:
+      # Java options for min and max memory that can 'consume' java. (Remember that jenkins is written in java).
+      # https://docs.oracle.com/cd/E21764_01/web.1111/e13814/jvm_tuning.htm#PERFM161
       JAVA_OPTS: "-Xms512m -Xmx1024m"
