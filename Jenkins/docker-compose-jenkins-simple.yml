@@ -2,12 +2,14 @@ version: '3.6'
 services:
   jenkins:
     container_name: jenkins
+    image: jenkins/jenkins:alpine
     hostname: jenkins-master
     restart: always
     ports:
       - "80:8080"
-    image: jenkins/jenkins:alpine
     volumes:
+      # Before start jenkins (solve some problems with permissions), add user permissions the local folder (no root permissions).
+      # chown -R 1000:1000 /srv/jenkins_home . (or your path if not is located in /srv)
       - /srv/jenkins_home:/var/jenkins_home
     environment:
       JAVA_OPTS: "-Xms512m -Xmx1024m"
